@@ -1,5 +1,6 @@
 <app-balance [transactions]="transactions()" ></app-balance>
 
+<div class="transactions">
   @for (item of transactions(); track item) {
     <li>
       <app-transaction-item [transaction]="item"></app-transaction-item>
@@ -7,3 +8,4 @@
   } @empty {
     <app-no-transactions />
   }
+</div>
