@@ -1,1 +1,7 @@
-<app-balance></app-balance>
+<app-balance [transactions]="transactions()" ></app-balance>
+
+  @for (item of transactions(); track item) {
+    <li>
+      <app-transaction-item [transaction]="item"></app-transaction-item>
+    </li>
+  }
