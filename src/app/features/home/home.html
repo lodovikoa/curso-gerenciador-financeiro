@@ -3,7 +3,7 @@
 <div class="transactions">
   @for (item of transactions(); track item) {
     <li>
-      <app-transaction-item [transaction]="item"></app-transaction-item>
+      <app-transaction-item class="transaction" [transaction]="item"></app-transaction-item>
     </li>
   } @empty {
     <app-no-transactions />

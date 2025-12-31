@@ -3,7 +3,7 @@ import { Balance } from "./components/balance/balance";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { Transaction } from '../../shared/transaction/interfaces/transactions';
 import { NoTransactions } from "./components/no-transactions/no-transactions";
-import { HttpClient } from '@angular/common/http';
+import { TransactionsService } from '../../shared/transaction/services/transactions';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Home implements OnInit {
 
-  private httpClient = inject(HttpClient);
+  private transactionsService = inject(TransactionsService);
 
   transactions = signal<Transaction[]>([]);
 
@@ -21,11 +21,12 @@ export class Home implements OnInit {
     this.getTransactions();
   }
 
+
   private getTransactions() {
-    this.httpClient
-      .get<Transaction[]>('http://localhost:3000/transactions')
-      .subscribe((transactions) => {
+    this.transactionsService.getAll().subscribe({
+      next: (transactions) => {
         this.transactions.set(transactions);
-      });
+      }
+    });
   }
 }
