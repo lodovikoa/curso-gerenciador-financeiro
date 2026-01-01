@@ -6,3 +6,9 @@
   display: block;
   margin-bottom: 12px;
 }
+
+.actions {
+  display: flex;              // Permitir mover
+  justify-content: flex-end;  // Mover para direita
+  margin: 24px 0;
+}
