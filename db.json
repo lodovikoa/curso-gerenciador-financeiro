@@ -77,6 +77,12 @@
       "type": "income",
       "value": 50,
       "id": 13
+    },
+    {
+      "title": "teste",
+      "type": "outcome",
+      "value": 2560,
+      "id": 14
     }
   ]
 }

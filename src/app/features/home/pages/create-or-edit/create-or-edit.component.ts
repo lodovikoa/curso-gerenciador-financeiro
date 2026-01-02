@@ -21,10 +21,10 @@ import { FeedbackService } from '../../../../shared/feedback/services/feedback.s
             MatButtonToggleModule,
             NgxMaskDirective,
             JsonPipe],
-  templateUrl: './create.component.html',
-  styleUrl: './create.component.scss',
+  templateUrl: './create-or-edit.component.html',
+  styleUrl: './create-or-edit.component.scss',
 })
-export class CreateComponent {
+export class CreateOrEditComponent {
 
   private transactionsService = inject(TransactionsService);
   private router = inject(Router);
