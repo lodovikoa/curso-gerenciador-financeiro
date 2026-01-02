@@ -8,7 +8,7 @@ import { TransactionType } from '../../../../shared/transaction/enum/transaction
 import { NgxMaskDirective } from "ngx-mask";
 import { JsonPipe } from '@angular/common';
 import { TransactionsService } from '../../../../shared/transaction/services/transactions.service';
-import { TransactionPayload } from '../../../../shared/transaction/interfaces/transactions';
+import { Transaction, TransactionPayload } from '../../../../shared/transaction/interfaces/transactions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '../../../../shared/feedback/services/feedback.service';
 
@@ -32,14 +32,18 @@ export class CreateOrEditComponent {
   private feedbackService = inject(FeedbackService);
   readonly transactionType = TransactionType;
 
-  ngOnInit() {
-    console.log(this.activatedRoute.snapshot.data)
+  get transaction(): Transaction {
+    return this.activatedRoute.snapshot.data['transaction'];
+  }
+
+  get isEdit() {
+    return Boolean(this.transaction);
   }
 
   form = new FormGroup({
-    type:  new FormControl('', { validators: [Validators.required] }),
-    title: new FormControl('', { validators: [Validators.required] }),
-    value: new FormControl(0, { validators: [Validators.required] })
+    type:  new FormControl(this.transaction?.type ??  '', { validators: [Validators.required] }),
+    title: new FormControl(this.transaction?.title ?? '', { validators: [Validators.required] }),
+    value: new FormControl(this.transaction?.value ??  0, { validators: [Validators.required] })
    });
 
    submit() {
@@ -53,12 +57,21 @@ export class CreateOrEditComponent {
         value: this.form.value.value as number
       }
 
-      this.transactionsService.post(payload).subscribe({
-        next: () => {
-          this.feedbackService.success('Transação criada com sucesso.');
-          this.router.navigate(['/']);
-        }
-      });
+      if(this.isEdit) {
+         this.transactionsService.put(this.transaction.id, payload).subscribe({
+          next: () => {
+            this.feedbackService.success('Transação alterada com sucesso.');
+            this.router.navigate(['/']);
+          }
+        });
+      } else {
+        this.transactionsService.post(payload).subscribe({
+          next: () => {
+            this.feedbackService.success('Transação criada com sucesso.');
+            this.router.navigate(['/']);
+          }
+        });
+      }
    }
 
 }

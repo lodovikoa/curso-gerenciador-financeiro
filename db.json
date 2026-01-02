@@ -79,9 +79,9 @@
       "id": 13
     },
     {
-      "title": "teste",
-      "type": "outcome",
-      "value": 2560,
+      "title": "teste absoluto",
+      "type": "income",
+      "value": 2560.85,
       "id": 14
     }
   ]
