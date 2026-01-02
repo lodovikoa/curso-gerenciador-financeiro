@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Transaction } from '../interfaces/transactions';
+import { Transaction, TransactionPayload } from '../interfaces/transactions';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -11,6 +11,10 @@ export class TransactionsService {
 
   getAll() {
     return this.httpClient.get<Transaction[]>('http://localhost:3000/transactions');
+  }
+
+  post(payload: TransactionPayload) {
+    return this.httpClient.post<Transaction>('http://localhost:3000/transactions', payload);
   }
 
 }

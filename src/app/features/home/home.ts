@@ -3,7 +3,7 @@ import { Balance } from "./components/balance/balance";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { Transaction } from '../../shared/transaction/interfaces/transactions';
 import { NoTransactions } from "./components/no-transactions/no-transactions";
-import { TransactionsService } from '../../shared/transaction/services/transactions';
+import { TransactionsService } from '../../shared/transaction/services/transactions.service';
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink } from '@angular/router';
 

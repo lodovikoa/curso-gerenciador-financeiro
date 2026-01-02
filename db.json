@@ -1,24 +1,46 @@
 {
   "transactions": [
-    { "id": 1,
+    {
+      "id": 1,
       "title": "Salario",
       "value": 100,
       "type": "income"
     },
-    { "id": 2,
+    {
+      "id": 2,
       "title": "VA",
       "value": 50,
       "type": "outcome"
     },
-    { "id": 3,
+    {
+      "id": 3,
       "title": "Aluguel",
       "value": 100,
       "type": "outcome"
     },
-    { "id": 4,
+    {
+      "id": 4,
       "title": "Extra",
       "value": 50,
       "type": "income"
+    },
+    {
+      "title": "Salário Jan/26",
+      "type": "income",
+      "value": 5385.45,
+      "id": 5
+    },
+    {
+      "title": "Compras supermercado",
+      "type": "outcome",
+      "value": 1000,
+      "id": 6
+    },
+    {
+      "title": "Compras de roupas",
+      "type": "outcome",
+      "value": 1000.85,
+      "id": 7
     }
   ]
 }
