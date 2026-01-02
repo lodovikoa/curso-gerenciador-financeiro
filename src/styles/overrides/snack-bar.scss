@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+:root {
+  .snack-bar-success-feedback {
+      @include mat.snack-bar-overrides((
+        supporting-text-color: var(--mat-sys-on-surface),
+        button-color: var(--mat-sys-on-surface),
+        container-color: var(--custom-color-success),
+      ));
+  }
+}

@@ -10,7 +10,7 @@ import { JsonPipe } from '@angular/common';
 import { TransactionsService } from '../../../../shared/transaction/services/transactions.service';
 import { TransactionPayload } from '../../../../shared/transaction/interfaces/transactions';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FeedbackService } from '../../../../shared/feedback/services/feedback.service';
 
 @Component({
   selector: 'app-create',
@@ -28,8 +28,9 @@ export class CreateComponent {
 
   private transactionsService = inject(TransactionsService);
   private router = inject(Router);
-  private snackBar = inject(MatSnackBar);
+  private feedbackService = inject(FeedbackService);
   readonly transactionType = TransactionType;
+
 
   form = new FormGroup({
     type:  new FormControl('', { validators: [Validators.required] }),
@@ -38,25 +39,22 @@ export class CreateComponent {
    });
 
    submit() {
-    if(this.form.invalid) {
-      return;
-    }
-
-    const payload: TransactionPayload = {
-      title: this.form.value.title as string,
-      type: this.form.value.type as TransactionType,
-      value: this.form.value.value as number
-    }
-
-    this.transactionsService.post(payload).subscribe({
-      next: () => {
-        this.snackBar.open('Transação criada com sucesso.', 'OK', {
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
-        });
-        this.router.navigate(['/']);
+      if(this.form.invalid) {
+        return;
       }
-    });
+
+      const payload: TransactionPayload = {
+        title: this.form.value.title as string,
+        type: this.form.value.type as TransactionType,
+        value: this.form.value.value as number
+      }
+
+      this.transactionsService.post(payload).subscribe({
+        next: () => {
+          this.feedbackService.success('Transação criada com sucesso.');
+          this.router.navigate(['/']);
+        }
+      });
    }
 
 }

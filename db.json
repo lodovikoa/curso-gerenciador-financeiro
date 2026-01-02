@@ -41,6 +41,42 @@
       "type": "outcome",
       "value": 1000.85,
       "id": 7
+    },
+    {
+      "title": "Compras diversas",
+      "type": "outcome",
+      "value": 385.6,
+      "id": 8
+    },
+    {
+      "title": "Teste",
+      "type": "income",
+      "value": 100,
+      "id": 9
+    },
+    {
+      "title": "Outro teste",
+      "type": "outcome",
+      "value": 500,
+      "id": 10
+    },
+    {
+      "title": "Vamos lá",
+      "type": "income",
+      "value": 80.51,
+      "id": 11
+    },
+    {
+      "title": "compras",
+      "type": "outcome",
+      "value": 38.51,
+      "id": 12
+    },
+    {
+      "title": "teste feedback",
+      "type": "income",
+      "value": 50,
+      "id": 13
     }
   ]
 }
