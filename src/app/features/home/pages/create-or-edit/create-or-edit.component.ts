@@ -9,7 +9,7 @@ import { NgxMaskDirective } from "ngx-mask";
 import { JsonPipe } from '@angular/common';
 import { TransactionsService } from '../../../../shared/transaction/services/transactions.service';
 import { TransactionPayload } from '../../../../shared/transaction/interfaces/transactions';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '../../../../shared/feedback/services/feedback.service';
 
 @Component({
@@ -26,11 +26,15 @@ import { FeedbackService } from '../../../../shared/feedback/services/feedback.s
 })
 export class CreateOrEditComponent {
 
+  private activatedRoute = inject(ActivatedRoute);
   private transactionsService = inject(TransactionsService);
   private router = inject(Router);
   private feedbackService = inject(FeedbackService);
   readonly transactionType = TransactionType;
 
+  ngOnInit() {
+    console.log(this.activatedRoute.snapshot.data)
+  }
 
   form = new FormGroup({
     type:  new FormControl('', { validators: [Validators.required] }),
