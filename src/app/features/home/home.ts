@@ -6,6 +6,8 @@ import { NoTransactions } from "./components/no-transactions/no-transactions";
 import { TransactionsService } from '../../shared/transaction/services/transactions.service';
 import { MatButtonModule } from "@angular/material/button";
 import { Router, RouterLink } from '@angular/router';
+import { FeedbackService } from '../../shared/feedback/services/feedback.service';
+import { ConfirmationDialogService } from '../../shared/dialog/confirmation/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +15,13 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
+
 export class Home implements OnInit {
 
   private transactionsService = inject(TransactionsService);
   private router = inject(Router);
+  private feedbackService = inject(FeedbackService);
+  private confirmationDialogService = inject(ConfirmationDialogService);
 
   transactions = signal<Transaction[]>([]);
 
@@ -29,6 +34,26 @@ export class Home implements OnInit {
   }
 
   remove(transaction: Transaction) {
+    this.confirmationDialogService.open({
+      title: 'Excluir Transação',
+      message: 'Confirma excluir transação?',
+      yesBtnText: 'SIM',
+      noBtnText: 'NÃO'
+    })
+    .subscribe({
+      next:() => {
+        this.transactionsService.delete(transaction.id).subscribe({
+          next: () => {
+            this.removeTransaction(transaction);
+            this.feedbackService.success("Transação removida com sucesso!");
+          }
+        });
+      }
+    })
+
+  }
+
+  private removeTransaction(transaction: Transaction) {
     this.transactions.update((t) => t.filter(item => item.id !== transaction.id));
   }
 

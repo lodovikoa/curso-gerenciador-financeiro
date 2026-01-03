@@ -1,78 +1,6 @@
 {
   "transactions": [
     {
-      "title": "Salario Mensal",
-      "type": "income",
-      "value": 100,
-      "id": 1
-    },
-    {
-      "id": 2,
-      "title": "VA",
-      "value": 50,
-      "type": "outcome"
-    },
-    {
-      "id": 3,
-      "title": "Aluguel",
-      "value": 100,
-      "type": "outcome"
-    },
-    {
-      "id": 4,
-      "title": "Extra",
-      "value": 50,
-      "type": "income"
-    },
-    {
-      "title": "Salário Jan/26",
-      "type": "income",
-      "value": 5385.45,
-      "id": 5
-    },
-    {
-      "title": "Compras supermercado",
-      "type": "outcome",
-      "value": 1000,
-      "id": 6
-    },
-    {
-      "title": "Compras de roupas",
-      "type": "outcome",
-      "value": 1000.85,
-      "id": 7
-    },
-    {
-      "title": "Compras diversas",
-      "type": "outcome",
-      "value": 385.6,
-      "id": 8
-    },
-    {
-      "title": "Teste",
-      "type": "income",
-      "value": 100,
-      "id": 9
-    },
-    {
-      "title": "Outro teste",
-      "type": "outcome",
-      "value": 500,
-      "id": 10
-    },
-    {
-      "title": "Vamos lá",
-      "type": "income",
-      "value": 80.51,
-      "id": 11
-    },
-    {
-      "title": "compras",
-      "type": "outcome",
-      "value": 38.51,
-      "id": 12
-    },
-    {
       "title": "teste feedback",
       "type": "income",
       "value": 50,
@@ -83,18 +11,6 @@
       "type": "income",
       "value": 2560.85,
       "id": 14
-    },
-    {
-      "title": "Novo elemento2",
-      "type": "income",
-      "value": 120.86,
-      "id": 15
-    },
-    {
-      "title": "Ajustes realizados",
-      "type": "outcome",
-      "value": 5372.71,
-      "id": 16
     }
   ]
 }
