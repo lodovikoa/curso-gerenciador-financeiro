@@ -1,10 +1,10 @@
 {
   "transactions": [
     {
-      "id": 1,
-      "title": "Salario",
+      "title": "Salario Mensal",
+      "type": "income",
       "value": 100,
-      "type": "income"
+      "id": 1
     },
     {
       "id": 2,
@@ -89,6 +89,12 @@
       "type": "income",
       "value": 120.86,
       "id": 15
+    },
+    {
+      "title": "Ajustes realizados",
+      "type": "outcome",
+      "value": 5372.71,
+      "id": 16
     }
   ]
 }

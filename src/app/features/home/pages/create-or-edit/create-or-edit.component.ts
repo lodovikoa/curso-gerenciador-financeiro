@@ -11,6 +11,7 @@ import { TransactionsService } from '../../../../shared/transaction/services/tra
 import { Transaction, TransactionPayload } from '../../../../shared/transaction/interfaces/transactions';
 import { Router } from '@angular/router';
 import { FeedbackService } from '../../../../shared/feedback/services/feedback.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -53,21 +54,29 @@ export class CreateOrEditComponent {
         value: this.form().value.value as number
       }
 
-      if(this.isEdit()) {
-         this.transactionsService.put(this.transaction()!.id, payload).subscribe({
-          next: () => {
-            this.feedbackService.success('Transação alterada com sucesso.');
-            this.router.navigate(['/']);
-          }
-        });
-      } else {
-        this.transactionsService.post(payload).subscribe({
-          next: () => {
-            this.feedbackService.success('Transação criada com sucesso.');
-            this.router.navigate(['/']);
-          }
-        });
-      }
+      this.createOrEdit(payload).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+      });
+
+
    }
+
+  private createOrEdit(payload: TransactionPayload) {
+    if (this.isEdit()) {
+      return this.transactionsService.put(this.transaction()!.id, payload)
+        .pipe(
+          tap(() => this.feedbackService.success('Transação alterada com sucesso.'),
+          ),
+        );
+    } else {
+      return this.transactionsService.post(payload)
+        .pipe(
+          tap(() => this.feedbackService.success('Transação criada com sucesso.'),
+          ),
+        );
+    }
+  }
 
 }
