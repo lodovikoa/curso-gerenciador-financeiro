@@ -1,5 +1,5 @@
-import { Component, computed, input } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
+import { Component, input, computed } from "@angular/core";
+import { MatCardModule } from "@angular/material/card";
 
 type CardType = 'income' | 'outcome' | 'balance';
 

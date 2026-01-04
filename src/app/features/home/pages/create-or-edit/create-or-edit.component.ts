@@ -1,17 +1,17 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { JsonPipe } from "@angular/common";
+import { Component, inject, input, computed } from "@angular/core";
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { TransactionType } from '../../../../shared/transaction/enum/transaction-type';
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { Router } from "@angular/router";
 import { NgxMaskDirective } from "ngx-mask";
-import { JsonPipe } from '@angular/common';
-import { TransactionsService } from '../../../../shared/transaction/services/transactions.service';
-import { Transaction, TransactionPayload } from '../../../../shared/transaction/interfaces/transactions';
-import { Router } from '@angular/router';
-import { FeedbackService } from '../../../../shared/feedback/services/feedback.service';
-import { tap } from 'rxjs';
+import { tap } from "rxjs";
+import { FeedbackService } from "../../../../shared/feedback/services/feedback.service";
+import { TransactionType } from "../../../../shared/transaction/enum/transaction-type";
+import { Transaction, TransactionPayload } from "../../../../shared/transaction/interfaces/transactions";
+import { TransactionsService } from "../../../../shared/transaction/services/transactions.service";
 
 @Component({
   selector: 'app-create',

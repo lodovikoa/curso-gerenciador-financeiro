@@ -1,6 +1,6 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, input, computed } from "@angular/core";
+import { Transaction } from "../../../../../../shared/transaction/interfaces/transactions";
 import { BalanceCard } from "./components/balance-card/balance-card";
-import { Transaction } from '../../../../shared/transaction/interfaces/transactions';
 
 @Component({
   selector: 'app-balance',
