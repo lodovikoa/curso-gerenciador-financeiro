@@ -8,10 +8,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { Router, RouterLink } from '@angular/router';
 import { FeedbackService } from '../../shared/feedback/services/feedback.service';
 import { ConfirmationDialogService } from '../../shared/dialog/confirmation/services/confirmation-dialog.service';
+import { TransactionsContainerComponent } from './components/transactions-container/transactions-container.component';
 
 @Component({
   selector: 'app-home',
-  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink],
+  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
