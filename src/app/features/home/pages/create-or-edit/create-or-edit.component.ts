@@ -8,10 +8,10 @@ import { MatInputModule } from "@angular/material/input";
 import { Router } from "@angular/router";
 import { NgxMaskDirective } from "ngx-mask";
 import { tap } from "rxjs";
-import { FeedbackService } from "../../../../shared/feedback/services/feedback.service";
-import { TransactionType } from "../../../../shared/transaction/enum/transaction-type";
-import { Transaction, TransactionPayload } from "../../../../shared/transaction/interfaces/transactions";
-import { TransactionsService } from "../../../../shared/transaction/services/transactions.service";
+import { FeedbackService } from "@shared/feedback/services/feedback.service";
+import { TransactionType } from "@shared/transaction/enum/transaction-type";
+import { Transaction, TransactionPayload } from "@shared/transaction/interfaces/transactions";
+import { TransactionsService } from "@shared/transaction/services/transactions.service";
 
 @Component({
   selector: 'app-create',
