@@ -10,7 +10,7 @@ export class LoggedInUserStoreService {
 
   currentUser = computed(() => this.state() );
 
-  isLoggedIn = computed(() => this.state !== null );
+  isLoggedIn = computed(() => this.state() !== null );
 
   setUser(user: User) {
     this.state.set(user);
