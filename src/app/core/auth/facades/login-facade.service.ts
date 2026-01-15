@@ -20,9 +20,9 @@ export class LoginFacadeService {
   }
 
   refreshToken(token: string) {
-    return this.authService.refreshToken(token).pipe( //this.createUserSession());
-      tap((res) => this.authTokenStorageService.set(res.token())),        // Verificar porque precisa de () em token()
-      switchMap((res) => this.authService.getCurrentUser(res.token())),   // Verificar porque precisa de () em token()
+    return this.authService.refreshToken(token).pipe(
+      tap((res) => this.authTokenStorageService.set(res.token)),
+      switchMap((res) => this.authService.getCurrentUser(res.token)),
       tap(user => this.loggedInUserStoreService.setUser(user))
     );
   }

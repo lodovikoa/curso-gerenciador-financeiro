@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   refreshToken(token: string) {
-    return of({ token: generateToken });
+    return of({ token: generateToken() });
   }
 
 }
