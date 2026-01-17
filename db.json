@@ -2,7 +2,7 @@
   "transactions": [
     {
       "title": "teste absoluto",
-      "type": "income",
+      "type": "outcome",
       "value": 2560.85,
       "id": 14
     },
@@ -11,6 +11,12 @@
       "type": "outcome",
       "value": 99.85,
       "id": 16
+    },
+    {
+      "title": "gteste",
+      "type": "income",
+      "value": 500,
+      "id": 17
     }
   ]
 }

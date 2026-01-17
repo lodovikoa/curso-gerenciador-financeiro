@@ -3,8 +3,8 @@
       <div class="toolbar-content">
         <span>Gerenciador Financeiro</span>
 
-        @if(true){
-          <button matButton="filled" class="toolbar-logout">Sair</button>
+        @if(isLoggedIn()){
+          <button matButton="filled" class="toolbar-logout" (click)="logout()">Sair</button>
         }
       </div>
     </mat-toolbar>
