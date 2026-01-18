@@ -2,7 +2,7 @@
   "transactions": [
     {
       "title": "teste absoluto",
-      "type": "outcome",
+      "type": "income",
       "value": 2560.85,
       "id": 14
     },
