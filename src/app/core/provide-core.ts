@@ -30,4 +30,3 @@ export function provideCore() {
     { provide: LOCALE_ID, useValue: 'pt-BR' } // no curso colocou somente 'pt'.
   ]);
 }
-:

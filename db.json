@@ -17,6 +17,18 @@
       "type": "income",
       "value": 500,
       "id": 17
+    },
+    {
+      "title": "teste2",
+      "type": "income",
+      "value": 5851354.85,
+      "id": 18
+    },
+    {
+      "title": "teste3",
+      "type": "outcome",
+      "value": 5853640.5,
+      "id": 19
     }
   ]
 }
