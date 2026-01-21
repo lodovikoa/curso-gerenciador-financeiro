@@ -1,20 +1,27 @@
 import { formatCurrency } from '@angular/common';
-import { Pipe, PipeTransform } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
+
+const suffixes = ['K', 'M', 'B', 'T'];
 
 @Pipe({
   name: 'humanizeCurrency',
 })
 export class HumanizeCurrencyPipe implements PipeTransform {
 
+  private readonly currencyCode = inject(DEFAULT_CURRENCY_CODE);
+  private readonly localeId = inject(LOCALE_ID);
+
   transform(value: number): string {
-    const formattedValue = formatCurrency(value, 'pt-BR', 'R$ ', 'BRL' );
+    const formattedValue = formatCurrency(value, this.localeId, this.getCurrencySimbol());
     const splittedValue = formattedValue.split('.');
     if (splittedValue.length === 1) {
       return splittedValue[0];
     }
+    return this.formatValueWithSuffix(splittedValue);
+  }
 
-    const suffixes = ['K', 'M', 'B', 'T'];
-    const suffix = suffixes[splittedValue.length - 2];
+  private formatValueWithSuffix(splittedValue: string[]) {
+       const suffix = this.getSuffix(splittedValue);
     const [firstValue, secondValue] = splittedValue;
     const firstCharOfSecondValue = secondValue.charAt(0);
 
@@ -23,6 +30,20 @@ export class HumanizeCurrencyPipe implements PipeTransform {
     } else {
       return `${firstValue}.${firstCharOfSecondValue}${suffix}`;
     }
+  }
+
+  private getSuffix(splittedValue: string[]) {
+    return suffixes[splittedValue.length - 2];
+  }
+
+  private getCurrencySimbol() {
+    const { value } = new Intl.NumberFormat(this.localeId, {
+      style: 'currency',
+      currency: this.currencyCode
+    }).formatToParts(0).find(part => part.type === 'currency')!;
+
+    console.log('TTTTTTTTTTTEEEESTE: ' + value);
+    return value;
   }
 
 }
