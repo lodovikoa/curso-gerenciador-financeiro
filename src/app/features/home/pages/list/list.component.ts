@@ -1,4 +1,4 @@
-import { Component, inject, input, linkedSignal } from "@angular/core";
+import { Component, inject, input, linkedSignal, signal } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink, Router } from "@angular/router";
 import { ConfirmationDialogService } from "@shared/dialog/confirmation/services/confirmation-dialog.service";
@@ -9,10 +9,11 @@ import { Balance } from "./components/balance/balance";
 import { NoTransactions } from "./components/no-transactions/no-transactions";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
+import { KeyValuePipe } from "@angular/common";
 
 @Component({
   selector: 'app-list',
-  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent],
+  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent, KeyValuePipe],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
@@ -21,6 +22,19 @@ export class ListComponent {
   private router = inject(Router);
   private feedbackService = inject(FeedbackService);
   private confirmationDialogService = inject(ConfirmationDialogService);
+
+  object = signal({
+    name: 'Lucas',
+    age: 25,
+    job: 'Dev',
+  });
+
+  addProp() {
+    this.object.update((value: any) => {
+      value['hairColor'] = 'Black';
+      return value;
+    });
+  }
 
   transactions = input.required<Transaction[]>();
   items = linkedSignal(() => this.transactions());
