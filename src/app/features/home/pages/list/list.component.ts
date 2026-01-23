@@ -9,11 +9,10 @@ import { Balance } from "./components/balance/balance";
 import { NoTransactions } from "./components/no-transactions/no-transactions";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
-import { KeyValuePipe } from "@angular/common";
 
 @Component({
   selector: 'app-list',
-  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent, KeyValuePipe],
+  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
