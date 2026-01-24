@@ -11,7 +11,7 @@ export class MobileLayoutService {
   private readonly breakpointObserver = inject(BreakpointObserver);
 
   isMobile() {
-    const matches = this.breakpointObserver.observe('(max-width: 1280px)').pipe(
+    const matches = this.breakpointObserver.observe('(max-width: 768px)').pipe(
       map(state => state.matches)
     );
 
