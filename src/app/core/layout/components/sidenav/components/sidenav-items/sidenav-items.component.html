@@ -3,3 +3,9 @@
     <a mat-list-item [routerLink]="link.url" routerLinkActive="mdc-list-item--activated" [routerLinkActiveOptions]="{ exact: true }"> {{ link.label }} </a>
   }
 </mat-nav-list>
+
+@if(isLoggedIn()){
+  <mat-action-list>
+    <button mat-list-item appLogout>Sair</button>
+  </mat-action-list>
+}
