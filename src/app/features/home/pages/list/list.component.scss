@@ -1,3 +1,5 @@
+@use 'mixins/media-query' as mq;
+
 .transactions {
   margin: 24px 0;
 }
@@ -9,6 +11,10 @@
 
 .actions {
   display: flex;              // Permitir mover
-  justify-content: flex-end;  // Mover para direita
+  justify-content: center;   // Centralizar por padrão
   margin: 24px 0;
+
+  @include mq.media-query(sm) {
+    justify-content: flex-end;  // Mover para direita
+  }
 }
