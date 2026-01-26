@@ -18,6 +18,7 @@ export class SidenavItemsComponent {
 
   links = signal([
     { label: 'Home', url: '/',},
+    { label: 'Transações', url: '/transactions'},
   ]);
 
 

@@ -21,7 +21,7 @@ export class ListComponent {
   private router = inject(Router);
   private feedbackService = inject(FeedbackService);
   private confirmationDialogService = inject(ConfirmationDialogService);
-
+  private activatedRoute = inject(ActivatedRoute);
 
   object = signal({
     name: 'Lucas',
@@ -40,7 +40,7 @@ export class ListComponent {
   items = linkedSignal(() => this.transactions());
 
   edit(transaction: Transaction) {
-    this.router.navigate(['edit', transaction.id]);
+    this.router.navigate(['edit', transaction.id], { relativeTo: this.activatedRoute });
   }
 
   remove(transaction: Transaction) {

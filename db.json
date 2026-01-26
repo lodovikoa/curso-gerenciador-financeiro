@@ -29,6 +29,24 @@
       "type": "outcome",
       "value": 5853640.5,
       "id": 19
+    },
+    {
+      "title": "teste25",
+      "type": "income",
+      "value": 150.85,
+      "id": 20
+    },
+    {
+      "title": "teste20",
+      "type": "outcome",
+      "value": 15000.85,
+      "id": 21
+    },
+    {
+      "title": "teste85",
+      "type": "outcome",
+      "value": 12500.86,
+      "id": 22
     }
   ]
 }
