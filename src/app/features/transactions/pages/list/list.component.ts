@@ -5,14 +5,13 @@ import { ConfirmationDialogService } from "@shared/dialog/confirmation/services/
 import { FeedbackService } from "@shared/feedback/services/feedback.service";
 import { Transaction } from "@shared/transaction/interfaces/transactions";
 import { TransactionsService } from "@shared/transaction/services/transactions.service";
-import { Balance } from "./components/balance/balance";
 import { NoTransactions } from "./components/no-transactions/no-transactions";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
 
 @Component({
   selector: 'app-list',
-  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent],
+  imports: [TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })

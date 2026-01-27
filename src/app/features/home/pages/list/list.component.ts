@@ -1,18 +1,15 @@
 import { Component, inject, input, linkedSignal, signal } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
-import { RouterLink, Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 import { ConfirmationDialogService } from "@shared/dialog/confirmation/services/confirmation-dialog.service";
 import { FeedbackService } from "@shared/feedback/services/feedback.service";
 import { Transaction } from "@shared/transaction/interfaces/transactions";
 import { TransactionsService } from "@shared/transaction/services/transactions.service";
 import { Balance } from "./components/balance/balance";
-import { NoTransactions } from "./components/no-transactions/no-transactions";
-import { TransactionItem } from "./components/transaction-item/transaction-item";
-import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
 
 @Component({
   selector: 'app-list',
-  imports: [Balance, TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent],
+  imports: [Balance, MatButtonModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
