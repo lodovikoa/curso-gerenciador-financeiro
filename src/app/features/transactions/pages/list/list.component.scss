@@ -11,10 +11,29 @@
 
 .actions {
   display: flex;              // Permitir mover
-  justify-content: center;   // Centralizar por padrão
+  flex-direction: column;
+  align-items: center;   // Centralizar por padrão
   margin: 24px 0;
 
+  .search {
+    order: 2;  // Mover para baixo em telas pequenas
+  }
+
+  .add-transaction {
+    order: 1;  // Mover para cima em telas pequenas
+    margin-bottom: 24px;
+  }
+
   @include mq.media-query(sm) {
-    justify-content: flex-end;  // Mover para direita
+    flex-direction: row;
+
+    .search {
+      order: 1;  // Mover para cima em telas maiores
+    }
+
+    .add-transaction {
+      order: 2;  // Mover para baixo em telas maiores
+      margin-left: auto;
+    }
   }
 }

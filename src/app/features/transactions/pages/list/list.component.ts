@@ -8,14 +8,16 @@ import { TransactionsService } from "@shared/transaction/services/transactions.s
 import { NoTransactions } from "./components/no-transactions/no-transactions";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
+import { SearchComponent } from "./components/search/search.component";
 
 @Component({
   selector: 'app-list',
-  imports: [TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent],
+  imports: [TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent, SearchComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
 export class ListComponent {
+
   private transactionsService = inject(TransactionsService);
   private router = inject(Router);
   private feedbackService = inject(FeedbackService);
