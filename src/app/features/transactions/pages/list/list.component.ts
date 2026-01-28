@@ -39,6 +39,7 @@ export class ListComponent {
 
   transactions = input.required<Transaction[]>();
   items = linkedSignal(() => this.transactions());
+  searchTerm = signal('');
 
   edit(transaction: Transaction) {
     this.router.navigate(['edit', transaction.id], { relativeTo: this.activatedRoute });
