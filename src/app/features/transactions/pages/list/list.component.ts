@@ -1,4 +1,4 @@
-import { Component, inject, input, linkedSignal, signal } from "@angular/core";
+import { Component, inject, resource, signal } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { ConfirmationDialogService } from "@shared/dialog/confirmation/services/confirmation-dialog.service";
@@ -9,6 +9,7 @@ import { NoTransactions } from "./components/no-transactions/no-transactions";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
 import { SearchComponent } from "./components/search/search.component";
+import { firstValueFrom } from "rxjs";
 
 @Component({
   selector: 'app-list',
@@ -24,22 +25,23 @@ export class ListComponent {
   private confirmationDialogService = inject(ConfirmationDialogService);
   private activatedRoute = inject(ActivatedRoute);
 
-  object = signal({
-    name: 'Lucas',
-    age: 25,
-    job: 'Dev',
-  });
 
-  addProp() {
-    this.object.update((value: any) => {
-      value['hairColor'] = 'Black';
-      return value;
-    });
-  }
+  // transactions = input.required<Transaction[]>();
+  // items = linkedSignal(() => this.transactions());
 
-  transactions = input.required<Transaction[]>();
-  items = linkedSignal(() => this.transactions());
   searchTerm = signal('');
+
+  resourceRef = resource({
+    params: () => {
+      return {
+        searchTerm: this.searchTerm()
+      }
+    },
+    loader: ({ params: { searchTerm } }) => {
+      return firstValueFrom(this.transactionsService.getAll(searchTerm));
+    },
+    defaultValue:[]
+  })
 
   edit(transaction: Transaction) {
     this.router.navigate(['edit', transaction.id], { relativeTo: this.activatedRoute });
@@ -66,7 +68,7 @@ export class ListComponent {
   }
 
   private removeTransaction(transaction: Transaction) {
-    this.items.update((t) => t.filter(item => item.id !== transaction.id));
+    this.resourceRef.update((t) => t.filter(item => item.id !== transaction.id));
   }
 
 }
