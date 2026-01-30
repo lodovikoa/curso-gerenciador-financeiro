@@ -1,4 +1,4 @@
-import { Component, inject, signal } from "@angular/core";
+import { Component, inject, Signal, signal } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { ConfirmationDialogService } from "@shared/dialog/confirmation/services/confirmation-dialog.service";
@@ -9,7 +9,13 @@ import { NoTransactions } from "./components/no-transactions/no-transactions";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
 import { SearchComponent } from "./components/search/search.component";
-import { httpResource, HttpParams, HttpResourceRequest } from '@angular/common/http';
+import { toObservable, toSignal } from "@angular/core/rxjs-interop";
+import { debounceTime } from "rxjs";
+
+function typeDelay(signal: Signal<string>, delay: number) {
+  const observable = toObservable(signal).pipe(debounceTime(delay));
+  return toSignal(observable, { initialValue: '' });
+}
 
 @Component({
   selector: 'app-list',
@@ -25,25 +31,11 @@ export class ListComponent {
   private confirmationDialogService = inject(ConfirmationDialogService);
   private activatedRoute = inject(ActivatedRoute);
 
-
-  // transactions = input.required<Transaction[]>();
-  // items = linkedSignal(() => this.transactions());
-
   searchTerm = signal('');
 
-  resourceRef = httpResource<Transaction[]>(() => {
-    let httpParams = new HttpParams();
-
-    if (this.searchTerm()) {
-      httpParams = httpParams.append('q', this.searchTerm());
-    }
-    return {
-      url: '/api/transactions',
-      params: httpParams,
-    } as HttpResourceRequest;
-  }, {
-    defaultValue: []
-   });
+  resourceRef = this.transactionsService.getAllWithHttpResource(
+    typeDelay(this.searchTerm, 1000)
+  );
 
   edit(transaction: Transaction) {
     this.router.navigate(['edit', transaction.id], { relativeTo: this.activatedRoute });
