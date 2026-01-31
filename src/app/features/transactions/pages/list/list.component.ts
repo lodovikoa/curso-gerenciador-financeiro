@@ -1,4 +1,4 @@
-import { Component, inject, Signal, signal } from "@angular/core";
+import { Component, computed, inject, Signal, signal } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { ConfirmationDialogService } from "@shared/dialog/confirmation/services/confirmation-dialog.service";
@@ -11,6 +11,7 @@ import { TransactionsContainerComponent } from "./components/transactions-contai
 import { SearchComponent } from "./components/search/search.component";
 import { toObservable, toSignal } from "@angular/core/rxjs-interop";
 import { debounceTime } from "rxjs";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 function typeDelay(signal: Signal<string>, delay: number) {
   const observable = toObservable(signal).pipe(debounceTime(delay));
@@ -19,7 +20,13 @@ function typeDelay(signal: Signal<string>, delay: number) {
 
 @Component({
   selector: 'app-list',
-  imports: [TransactionItem, NoTransactions, MatButtonModule, RouterLink, TransactionsContainerComponent, SearchComponent],
+  imports: [TransactionItem,
+            NoTransactions,
+            MatButtonModule,
+            RouterLink,
+            TransactionsContainerComponent,
+            SearchComponent,
+            MatProgressBarModule ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
@@ -33,9 +40,12 @@ export class ListComponent {
 
   searchTerm = signal('');
 
-  resourceRef = this.transactionsService.getAllWithHttpResource(
+  private resourceRef = this.transactionsService.getAllWithHttpResource(
     typeDelay(this.searchTerm, 1000)
   );
+
+  transactions = computed(() => this.resourceRef.value());
+  isLoading =    computed(() => this.resourceRef.isLoading());
 
   edit(transaction: Transaction) {
     this.router.navigate(['edit', transaction.id], { relativeTo: this.activatedRoute });
