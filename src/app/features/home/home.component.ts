@@ -4,6 +4,7 @@ import { Balance } from "./components/balance/balance";
 import { PieChartComponent } from "./components/pie-chart/pie-chart.component";
 import { PieChartConfig } from "./components/pie-chart/pie-chart-config.interface";
 import { TransactionType } from "@shared/transaction/enum/transaction-type";
+import { sumTransactions } from "@shared/transaction/functions/sum-transactions";
 
 @Component({
   selector: 'app-home',
@@ -16,17 +17,11 @@ export class HomeComponent {
   transactions = input.required<Transaction[]>();
 
   totalIncomes = computed(() => {
-   return this.transactions()
-    .filter(item => item.type === TransactionType.INCOME)
-    .reduce((total, item) => total + item.value, 0)
-
+    return sumTransactions(this.transactions(), TransactionType.INCOME);
   });
 
   totalOutcomes = computed(() => {
-   return this.transactions()
-    .filter(item => item.type === TransactionType.OUTCOME)
-    .reduce((total, item) => total + item.value, 0)
-
+    return sumTransactions(this.transactions(), TransactionType.OUTCOME);
   });
 
 
