@@ -1,2 +1,7 @@
 <app-balance [transactions]="transactions()" ></app-balance>
-<app-pie-chart [config]="chartConfig()"></app-pie-chart>
+
+@defer () {
+  <app-pie-chart [config]="chartConfig()"></app-pie-chart>
+} @placeholder(minimum 1s) {
+  <p>Aqui é um placeholder</p>
+}
