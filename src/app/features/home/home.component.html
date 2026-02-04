@@ -1,6 +1,6 @@
 <app-balance [transactions]="transactions()" ></app-balance>
 
-@defer (when canLoadComponent()) {
+@defer (when canLoadComponent(); on interaction(interactionClick)) {
   <app-pie-chart [config]="chartConfig()"></app-pie-chart>
 } @loading(minimum 1s) {
   <p>Carrgando conteúdo</p>
@@ -10,6 +10,12 @@
   </div>
 
   <div>
-    <button (click)="canLoadComponent.set(true)">Clique Válido</button>
+    <button #interactionClick>Clique usando interaction</button>
   </div>
+
+  <div>
+    <button (click)="canLoadComponent.set(true)">Clique usando When</button>
+  </div>
+} @error {
+  <p>Erro ao carregar componente!</p>
 }
