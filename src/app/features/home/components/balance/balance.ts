@@ -1,4 +1,4 @@
-import { Component, input, computed } from "@angular/core";
+import { Component, input, computed, ChangeDetectionStrategy } from "@angular/core";
 import { BalanceCard } from "./components/balance-card/balance-card";
 import { Transaction } from "@shared/transaction/interfaces/transactions";
 import { sumTransactions } from "@shared/transaction/functions/sum-transactions";
@@ -9,6 +9,7 @@ import { TransactionType } from "@shared/transaction/enum/transaction-type";
   imports: [BalanceCard],
   templateUrl: './balance.html',
   styleUrl: './balance.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Balance {
   transactions = input.required<Transaction[]>();

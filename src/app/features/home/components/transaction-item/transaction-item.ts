@@ -1,4 +1,4 @@
-import { Component, input, output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, input, output } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { TransactionValue } from "./components/transaction-value/transaction-value";
@@ -12,6 +12,7 @@ import { Transaction } from "@shared/transaction/interfaces/transactions";
   imports: [MatCardModule, MatButtonModule, TransactionValue, CustomColorDirective, IsIncomeDirective, MatChipsModule],
   templateUrl: './transaction-item.html',
   styleUrl: './transaction-item.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TransactionItem {
   transaction = input.required<Transaction>();

@@ -1,4 +1,4 @@
-import { Component, input, computed } from "@angular/core";
+import { Component, input, computed, ChangeDetectionStrategy } from "@angular/core";
 
 import { CurrencyPipe } from "@angular/common";
 import { TransactionType } from "@shared/transaction/enum/transaction-type";
@@ -16,6 +16,7 @@ const CssClasses = {
   templateUrl: './transaction-value.html',
   // template: '{{transaction().value}}',
   styleUrl: './transaction-value.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'cssClass()',
   }

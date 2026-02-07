@@ -1,4 +1,4 @@
-import { Component, DestroyRef, effect, ElementRef, inject, input, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, ElementRef, inject, input, viewChild } from '@angular/core';
 import Chart from 'chart.js/auto'
 import { PieChartConfig } from './pie-chart-config.interface';
 
@@ -7,6 +7,7 @@ import { PieChartConfig } from './pie-chart-config.interface';
   imports: [],
   templateUrl: './pie-chart.component.html',
   styleUrl: './pie-chart.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieChartComponent {
 

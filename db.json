@@ -7,15 +7,9 @@
       "id": 14
     },
     {
-      "title": "Investimentos",
-      "type": "outcome",
-      "value": 99.85,
-      "id": 16
-    },
-    {
       "title": "gteste",
-      "type": "income",
-      "value": 500,
+      "type": "outcome",
+      "value": 5000,
       "id": 17
     },
     {
@@ -41,6 +35,12 @@
       "type": "outcome",
       "value": 500000,
       "id": 25
+    },
+    {
+      "title": "Novo onPush",
+      "type": "outcome",
+      "value": 50000,
+      "id": 26
     }
   ]
 }

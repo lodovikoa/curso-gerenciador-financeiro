@@ -1,5 +1,5 @@
 import { Layout } from './../../layout';
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavItemsComponent } from './components/sidenav-items/sidenav-items.component';
 import { MobileLayoutService } from '@core/layout/services/mobile-layout.service';
@@ -10,6 +10,7 @@ import { SidenavVisibilityStore } from '@core/layout/stores/sidenav-visibility.s
   imports: [MatSidenavModule, SidenavItemsComponent],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavComponent {
 

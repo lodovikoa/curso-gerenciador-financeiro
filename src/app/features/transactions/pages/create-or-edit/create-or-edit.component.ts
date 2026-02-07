@@ -1,5 +1,5 @@
 import { JsonPipe } from "@angular/common";
-import { Component, inject, input, computed } from "@angular/core";
+import { Component, inject, input, computed, ChangeDetectionStrategy } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
@@ -28,6 +28,7 @@ import { CustomFormFieldDirective } from "@shared/material/form-field/directives
             CustomFormFieldDirective],
   templateUrl: './create-or-edit.component.html',
   styleUrl: './create-or-edit.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateOrEditComponent {
 
