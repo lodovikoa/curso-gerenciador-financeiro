@@ -31,28 +31,16 @@
       "id": 19
     },
     {
-      "title": "teste25",
-      "type": "income",
-      "value": 150.85,
-      "id": 20
-    },
-    {
       "title": "teste20",
       "type": "outcome",
       "value": 15000.85,
       "id": 21
     },
     {
-      "title": "testre",
-      "type": "income",
-      "value": 1.85,
-      "id": 23
-    },
-    {
-      "title": "uyuyu",
-      "type": "income",
-      "value": 10.65,
-      "id": 24
+      "title": "Zone Teste",
+      "type": "outcome",
+      "value": 500000,
+      "id": 25
     }
   ]
 }

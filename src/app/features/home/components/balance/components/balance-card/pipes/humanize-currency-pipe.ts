@@ -42,7 +42,6 @@ export class HumanizeCurrencyPipe implements PipeTransform {
       currency: this.currencyCode
     }).formatToParts(0).find(part => part.type === 'currency')!;
 
-    console.log('TTTTTTTTTTTEEEESTE: ' + value);
     return value;
   }
 
