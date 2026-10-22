@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, Signal, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, computed, debounced, inject, Signal, signal } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { ConfirmationDialogService } from "@shared/dialog/confirmation/services/confirmation-dialog.service";
@@ -9,14 +9,8 @@ import { NoTransactions } from "./components/no-transactions/no-transactions";
 import { TransactionItem } from "./components/transaction-item/transaction-item";
 import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
 import { SearchComponent } from "./components/search/search.component";
-import { toObservable, toSignal } from "@angular/core/rxjs-interop";
-import { debounceTime } from "rxjs";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 
-function typeDelay(signal: Signal<string>, delay: number) {
-  const observable = toObservable(signal).pipe(debounceTime(delay));
-  return toSignal(observable, { initialValue: '' });
-}
 
 @Component({
   selector: 'app-list',
@@ -40,9 +34,10 @@ export class ListComponent {
   private activatedRoute = inject(ActivatedRoute);
 
   searchTerm = signal('');
+  searchTermWithDebounce = debounced(this.searchTerm, 500);
 
   private resourceRef = this.transactionsService.getAllWithHttpResource(
-    typeDelay(this.searchTerm, 1000)
+    this.searchTermWithDebounce.value,
   );
 
   transactions = computed(() => this.resourceRef.value());

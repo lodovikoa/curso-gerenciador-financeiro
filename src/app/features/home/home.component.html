@@ -1,9 +1,9 @@
-<app-balance [transactions]="transactions()" ></app-balance>
+<app-balance [transactions]="transactions()"  />
 
 <div class="chart-container">
   @defer (when canLoadComponent(); on interaction(interactionClick)) {
     <mat-card class="card">
-      <app-pie-chart [config]="chartConfig()"></app-pie-chart>
+      <app-pie-chart [config]="chartConfig()" />
     </mat-card>
   } @loading(minimum 1s) {
     <mat-card class="card">

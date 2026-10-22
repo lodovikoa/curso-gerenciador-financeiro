@@ -1,20 +1,18 @@
 
 <div class="actions">
-  <app-search class="search" [(searchTerm)]="searchTerm"></app-search>
+  <app-search class="search" [(searchTerm)]="searchTerm" />
   <a class="add-transaction" matButton="filled" routerLink="create/new">Adicionar transação</a>
 </div>
 
 @if(isLoading()) {
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" />
 }@else {
   <app-transactions-container class="transactions" [transactions]="transactions()" >
     <ng-template #item let-item="item">
-      <app-transaction-item
-          class="transaction"
+      <app-transaction-item class="transaction"
           [transaction]="item"
           (edit)="edit($event)"
-          (remove)="remove($event)">
-        </app-transaction-item>
+          (remove)="remove($event)" />
     </ng-template>
 
     <ng-template #noItems>
