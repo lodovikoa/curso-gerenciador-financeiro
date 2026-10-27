@@ -1,6 +1,7 @@
 import { inject, Injectable, Signal } from '@angular/core';
 import { Transaction, TransactionPayload } from '../interfaces/transactions';
 import { HttpClient, HttpParams, httpResource, HttpResourceRequest } from '@angular/common/http';
+import { getTransactionsFilter } from '../interfaces/get-transations-filter';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ export class TransactionsService {
   private httpClient = inject(HttpClient);
 
   getAll(searchTerm?: string) {
+    console.log('PARAMETROS:', searchTerm)
 
     let httpParms = new HttpParams();
 
@@ -19,13 +21,20 @@ export class TransactionsService {
     return this.httpClient.get<Transaction[]>('/api/transactions', { params: httpParms });
   }
 
-  getAllWithHttpResource(searchTerm: Signal<string>) {
+  getAllWithHttpResource(filter: Signal<getTransactionsFilter>) {
     return httpResource<Transaction[]>(() => {
     let httpParams = new HttpParams();
 
-    if (searchTerm()) {
-      httpParams = httpParams.append('q', searchTerm());
+    if (filter().search) {
+      httpParams = httpParams.append('q', filter().search);
     }
+
+    if (filter().type !== 'all') {
+      httpParams = httpParams.append('type',filter().type);
+    }
+
+    console.log('PARAMETROS:', httpParams)
+
     return {
       url: '/api/transactions',
       params: httpParams,

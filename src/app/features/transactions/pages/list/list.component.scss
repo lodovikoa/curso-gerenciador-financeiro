@@ -19,6 +19,10 @@
     order: 2;  // Mover para baixo em telas pequenas
   }
 
+  .type {
+    order: 3;
+  }
+
   .add-transaction {
     order: 1;  // Mover para cima em telas pequenas
     margin-bottom: 24px;
@@ -26,13 +30,18 @@
 
   @include mq.media-query(sm) {
     flex-direction: row;
+    gap: 24px;
 
     .search {
       order: 1;  // Mover para cima em telas maiores
     }
 
+    .type {
+      order: 2;
+    }
+
     .add-transaction {
-      order: 2;  // Mover para baixo em telas maiores
+      order: 3;  // Mover para baixo em telas maiores
       margin-left: auto;
     }
   }

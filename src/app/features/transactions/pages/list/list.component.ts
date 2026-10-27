@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, debounced, inject, Signal, signal } from "@angular/core";
+import { TransactionType } from '@shared/transaction/enum/transaction-type';
+import { ChangeDetectionStrategy, Component, computed, debounced, inject, linkedSignal, Signal, signal } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { ConfirmationDialogService } from "@shared/dialog/confirmation/services/confirmation-dialog.service";
@@ -10,7 +11,17 @@ import { TransactionItem } from "./components/transaction-item/transaction-item"
 import { TransactionsContainerComponent } from "./components/transactions-container/transactions-container.component";
 import { SearchComponent } from "./components/search/search.component";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { getTransactionsFilter } from "@shared/transaction/interfaces/get-transations-filter";
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
+const TypeFilterOptions = [
+  { value: 'all', label: 'Todas' },
+  { value: TransactionType.INCOME, label: 'Receitas' },
+  { value: TransactionType.OUTCOME, label: 'Despesas' }
+];
 
 @Component({
   selector: 'app-list',
@@ -20,7 +31,11 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
             RouterLink,
             TransactionsContainerComponent,
             SearchComponent,
-            MatProgressBarModule ],
+            MatProgressBarModule,
+            MatInputModule,
+            MatSelectModule,
+            MatFormFieldModule,
+            FormsModule ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -33,12 +48,40 @@ export class ListComponent {
   private confirmationDialogService = inject(ConfirmationDialogService);
   private activatedRoute = inject(ActivatedRoute);
 
-  searchTerm = signal('');
-  searchTermWithDebounce = debounced(this.searchTerm, 500);
+  typeFilterOptions = TypeFilterOptions;
+
+  filters = signal<getTransactionsFilter>({
+    search: '',
+    type: 'all'
+  });
+
+  fitersTermWithDebounce = debounced(this.filters, 500);
 
   private resourceRef = this.transactionsService.getAllWithHttpResource(
-    this.searchTermWithDebounce.value,
+    this.fitersTermWithDebounce.value,
   );
+
+  search = linkedSignal(() => this.filters().search, {
+    set: (value) => {
+      this.filters.update((filters) => {
+        return {
+          ...filters,
+          search: value,
+        }
+      })
+    }
+  });
+
+  type = linkedSignal(() => this.filters().type, {
+    set: (value) => {
+      this.filters.update((filters) => {
+        return {
+          ...filters,
+          type: value,
+        }
+      })
+    }
+  });
 
   transactions = computed(() => this.resourceRef.value());
   isLoading =    computed(() => this.resourceRef.isLoading());
