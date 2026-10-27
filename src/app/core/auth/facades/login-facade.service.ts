@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { UserCredentials } from '../interfaces/user-credentials';
 import { AuthService } from '../services/auth.service';
 import { pipe, switchMap, tap } from 'rxjs';
@@ -6,9 +6,7 @@ import { AuthTokenStorageService } from '../services/auth-token-storage.service'
 import { LoggedInUserStoreService } from '../stores/logged-in-user-store.service';
 import { AuthTokenResponse } from '../interfaces/auth-token-response';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class LoginFacadeService {
 
   private readonly authService = inject(AuthService);
